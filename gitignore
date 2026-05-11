@@ -1,7 +1,7 @@
 data/raw_vacancies.json
 data/llm_checkpoint.json
 data/checkpoint.json
-
+data/blocked_pages
 
 data/llm_results.json
 __pycache__/
