@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI/ML рынок России 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f6fa; color: #1a1a2e; font-size: 15px; line-height: 1.6; }
+
+  header { background: #fff; border-bottom: 1px solid #e0e0e0; padding: 16px 32px; display: flex; align-items: center; justify-content: space-between; }
+  header h1 { font-size: 18px; font-weight: 600; }
+  header span { font-size: 13px; color: #888; }
+
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+  .hero-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+  .stat-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 20px 24px; }
+  .stat-card .n { font-size: 30px; font-weight: 700; color: #3b5bdb; letter-spacing: -1px; }
+  .stat-card .l { font-size: 12px; color: #888; margin-top: 2px; }
+
+  .section-title { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+  .section-hint { color: #888; font-size: 13px; margin-bottom: 16px; }
+
+  .tabs { display: flex; gap: 10px; flex-wrap: wrap; }
+  .tab-btn { padding: 10px 22px; border-radius: 8px; border: 2px solid #e0e0e0; background: #fff; font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.18s; color: #444; }
+  .tab-btn:hover { border-color: #3b5bdb; color: #3b5bdb; }
+  .tab-btn.active { background: #3b5bdb; border-color: #3b5bdb; color: #fff; }
+
+  .profile-card { display: none; background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 28px; margin-top: 16px; gap: 32px; }
+  .profile-card.show { display: grid; grid-template-columns: 1fr 1fr; }
+
+  .profile-card h3 { font-size: 20px; margin-bottom: 4px; }
+  .profile-card .sub { color: #888; font-size: 13px; margin-bottom: 14px; }
+  .profile-card .desc { font-size: 14px; color: #444; line-height: 1.7; margin-bottom: 18px; font-style: italic; border-left: 3px solid #e0e0e0; padding-left: 14px; }
+
+  .lbl { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 8px; font-weight: 600; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 18px; }
+  .chip { padding: 4px 10px; background: #eef2ff; border: 1px solid #c7d2fe; border-radius: 5px; font-size: 12px; color: #3b5bdb; }
+  .chip-soft { background: #f8f8f8; border-color: #e0e0e0; color: #555; }
+
+  .key-req { background: #f8f9ff; border-left: 3px solid #3b5bdb; padding: 12px 16px; border-radius: 0 6px 6px 0; font-size: 14px; color: #333; margin-bottom: 20px; }
+  .info-row { display: flex; flex-direction: column; gap: 14px; }
+  .info-item .il { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 4px; font-weight: 600; }
+  .info-item .iv { font-size: 14px; color: #222; }
+  .score-dots { display: flex; gap: 5px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; background: #e0e0e0; }
+  .dot.on { background: #3b5bdb; }
+
+  .data-note { font-size: 11px; color: #aaa; margin-top: 20px; padding-top: 16px; border-top: 1px solid #f0f0f0; }
+
+  .charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+  .chart-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; padding: 24px; }
+  .chart-card h4 { font-size: 15px; font-weight: 600; margin-bottom: 3px; }
+  .chart-card .csub { font-size: 12px; color: #888; margin-bottom: 18px; }
+  canvas { max-height: 280px; }
+
+  footer { text-align: center; padding: 28px; color: #aaa; font-size: 12px; }
+  footer a { color: #aaa; }
+
+  @media (max-width: 700px) {
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    .profile-card.show { grid-template-columns: 1fr; }
+    .charts-grid { grid-template-columns: 1fr; }
+    header { flex-direction: column; gap: 4px; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AI/ML рынок России — 2026</h1>
+  <span>hh.ru · Май 2025 · LLM: Ollama qwen2.5:3b</span>
+</header>
+
+<div class="container">
+
+  <div class="hero-stats">
+    <div class="stat-card"><div class="n">4 800</div><div class="l">вакансий собрано с hh.ru</div></div>
+    <div class="stat-card"><div class="n">1 535</div><div class="l">AI/ML релевантных после фильтрации</div></div>
+    <div class="stat-card"><div class="n">1 253</div><div class="l">прогнано через LLM (qwen2.5:3b)</div></div>
+    <div class="stat-card"><div class="n">10</div><div class="l">выделенных специализаций</div></div>
+  </div>
+
+  <div class="section-title">Профили специализаций</div>
+  <p class="section-hint">Нажми на специализацию — портрет кандидата сформирован на основе агрегированных LLM-результатов по реальным вакансиям.</p>
+
+  <div class="tabs" id="tabs"></div>
+  <div id="profiles-container"></div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <h4>Распределение по грейдам</h4>
+      <div class="csub">1 535 вакансий</div>
+      <canvas id="gradesChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>Топ городов</h4>
+      <div class="csub">Москва — 63.4% всех AI/ML вакансий</div>
+      <canvas id="citiesChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>Специализации рынка</h4>
+      <div class="csub">10 выделенных направлений</div>
+      <canvas id="specsChart"></canvas>
+    </div>
+    <div class="chart-card">
+      <h4>Топ-15 технологий</h4>
+      <div class="csub">Количество упоминаний в описаниях вакансий</div>
+      <canvas id="skillsChart"></canvas>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  Данные: hh.ru · Май 2025 · Pipeline: scraper → wrangling → EDA → LLM ·
+  <a href="https://github.com">GitHub</a>
+</footer>
+
+<script>
+// ── Fallback — если profiles.json ещё не сгенерирован ─────────────────────────
+const FALLBACK = {
+  data_science: {
+    label: "Data Scientist", emoji: "📊",
+    count: 335,
+    description: "Запусти python 6_profiles.py — описание сгенерируется из реальных данных.",
+    hard_skills: ["Python","SQL","pandas","scikit-learn","PyTorch","Jupyter","Git","Airflow"],
+    soft_skills: ["Аналитическое мышление","Коммуникация с бизнесом","Презентация результатов"],
+    key_requirements: ["Умение переводить бизнес-задачу в ML-задачу"],
+    perspective_score: 4.0,
+    salary: null,
+  },
+  ml_engineer: {
+    label: "ML / AI Engineer", emoji: "⚙️",
+    count: 283,
+    description: "Запусти python 6_profiles.py — описание сгенерируется из реальных данных.",
+    hard_skills: ["Python","PyTorch","Docker","Kubernetes","MLflow","FastAPI","Airflow","ONNX"],
+    soft_skills: ["Системное мышление","Ответственность за прод","Внимание к деталям"],
+    key_requirements: ["Опыт вывода ML-моделей в продакшн"],
+    perspective_score: 5.0,
+    salary: null,
+  },
+  llm_genai: {
+    label: "LLM & GenAI", emoji: "🤖",
+    count: 276,
+    description: "Запусти python 6_profiles.py — описание сгенерируется из реальных данных.",
+    hard_skills: ["Python","LLM API","RAG","LangChain","LlamaIndex","FastAPI","Prompt Engineering"],
+    soft_skills: ["Исследовательский склад ума","Быстрое обучение","Умение ставить эксперименты"],
+    key_requirements: ["Опыт построения RAG-пайплайнов и оценки качества генерации"],
+    perspective_score: 5.0,
+    salary: null,
+  }
+};
+
+// ── Рендер профиля ─────────────────────────────────────────────────────────────
+function dots(n) {
+  const score = Math.round(n);
+  return Array.from({length:5}, (_,i) =>
+    `<div class="dot ${i < score ? 'on' : ''}"></div>`
+  ).join('');
+}
+
+function renderProfiles(profiles) {
+  const tabsEl = document.getElementById('tabs');
+  const container = document.getElementById('profiles-container');
+  const keys = Object.keys(profiles);
+
+  keys.forEach((key, idx) => {
+    const p = profiles[key];
+
+    // Tab button
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn';
+    btn.innerHTML = `${p.emoji} ${p.label}`;
+    btn.onclick = () => toggleProfile(key);
+    btn.id = `tab-${key}`;
+    tabsEl.appendChild(btn);
+
+    // Salary text
+    let salText = 'нет данных в выборке';
+    if (p.salary && p.salary.n > 2) {
+      salText = `медиана ~${p.salary.median.toLocaleString('ru')} ₽ (n=${p.salary.n})`;
+    }
+
+    // Key requirement (берём первый из списка)
+    const keyReq = (p.key_requirements || [])[0] || '—';
+
+    // Source note
+    const srcNote = p.count
+      ? `Профиль построен по ${p.count} вакансиям из llm_checkpoint.json · perspective score: ${p.perspective_score}/5`
+      : 'Fallback-данные';
+
+    const card = document.createElement('div');
+    card.className = 'profile-card';
+    card.id = `profile-${key}`;
+    card.innerHTML = `
+      <div>
+        <h3>${p.emoji} ${p.label}</h3>
+        <div class="sub">${p.count} вакансий · реальные данные hh.ru 2025</div>
+        <p class="desc">${p.description}</p>
+        <div class="lbl">Hard Skills — топ по частоте упоминаний</div>
+        <div class="chips">${p.hard_skills.map(s=>`<span class="chip">${s}</span>`).join('')}</div>
+        <div class="lbl">Soft Skills</div>
+        <div class="chips">${p.soft_skills.map(s=>`<span class="chip chip-soft">${s}</span>`).join('')}</div>
+      </div>
+      <div>
+        <div class="lbl">Ключевое требование</div>
+        <div class="key-req">${keyReq}</div>
+        <div class="info-row">
+          <div class="info-item">
+            <div class="il">Востребованность (perspective score)</div>
+            <div class="score-dots">${dots(p.perspective_score)}</div>
+          </div>
+          <div class="info-item">
+            <div class="il">Зарплата из данных</div>
+            <div class="iv">${salText}</div>
+          </div>
+          ${p.key_requirements && p.key_requirements.length > 1 ? `
+          <div class="info-item">
+            <div class="il">Другие частые требования</div>
+            <div class="iv" style="color:#555;font-size:13px">${p.key_requirements.slice(1,4).join(' · ')}</div>
+          </div>` : ''}
+        </div>
+        <div class="data-note">📊 ${srcNote}</div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+function toggleProfile(key) {
+  const isOpen = document.getElementById(`profile-${key}`).classList.contains('show');
+  document.querySelectorAll('.profile-card').forEach(el => el.classList.remove('show'));
+  document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+  if (!isOpen) {
+    document.getElementById(`profile-${key}`).classList.add('show');
+    document.getElementById(`tab-${key}`).classList.add('active');
+    setTimeout(() => document.getElementById(`profile-${key}`)
+      .scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+  }
+}
+
+// Пробуем загрузить реальные profiles.json, иначе используем fallback
+fetch('data/profiles.json')
+  .then(r => { if (!r.ok) throw new Error('not found'); return r.json(); })
+  .then(profiles => { console.log('✓ profiles.json загружен'); renderProfiles(profiles); })
+  .catch(() => { console.log('profiles.json не найден — используем fallback'); renderProfiles(FALLBACK); });
+
+// ── Charts ─────────────────────────────────────────────────────────────────────
+const gc = 'rgba(0,0,0,0.05)';
+Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif";
+Chart.defaults.color = '#888';
+
+new Chart(document.getElementById('gradesChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Middle (36.7%)', 'Junior (32.5%)', 'Senior (30.8%)'],
+    datasets: [{ data: [563, 499, 473], backgroundColor: ['#3b5bdb','#51cf66','#ff6b6b'], borderColor: '#fff', borderWidth: 3, hoverOffset: 6 }]
+  },
+  options: { cutout: '60%', plugins: { legend: { position: 'bottom', labels: { padding: 16, font: {size: 12} } }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw} вакансий` } } } }
+});
+
+new Chart(document.getElementById('citiesChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Москва', 'Санкт-Петербург', 'Екатеринбург', 'Новосибирск', 'Казань', 'Н. Новгород'],
+    datasets: [{ data: [973, 140, 31, 28, 26, 21], backgroundColor: ctx => ctx.dataIndex === 0 ? '#3b5bdb' : '#a5b4fc', borderRadius: 5, borderSkipped: false }]
+  },
+  options: { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw} вак.` } } }, scales: { x: { grid: { color: gc } }, y: { grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('specsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Data Science','LLM / GenAI','General ML','AI Engineer','NLP','MLOps','Computer Vision'],
+    datasets: [{ data: [335, 276, 214, 168, 129, 104, 101], backgroundColor: ['#3b5bdb','#51cf66','#ff6b6b','#ffd43b','#a9e34b','#74c0fc','#f783ac'], borderRadius: 5, borderSkipped: false }]
+  },
+  options: { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw} вакансий` } } }, scales: { x: { grid: { color: gc } }, y: { grid: { display: false } } } }
+});
+
+new Chart(document.getElementById('skillsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Python','LLM','SQL','Docker','PyTorch','Kubernetes','RAG','PostgreSQL','Git','Airflow','Kafka','Spark','FastAPI','MLflow','scikit-learn'],
+    datasets: [{ data: [814,420,416,328,265,253,231,221,210,175,152,139,137,130,123], backgroundColor: '#3b5bdb', borderRadius: 4, borderSkipped: false }]
+  },
+  options: { indexAxis: 'y', plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ` ${ctx.raw} упоминаний` } } }, scales: { x: { grid: { color: gc } }, y: { grid: { display: false }, ticks: { font: {size: 11} } } } }
+});
+</script>
+</body>
+</html>
