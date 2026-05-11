@@ -56,6 +56,7 @@ index.html          →  интерактивный дашборд
 ├── index.html
 ├── data/
 │   ├── cleaned.csv
+│   ├── profile.json
 │   └── data.json
 └── README.md
 ```
